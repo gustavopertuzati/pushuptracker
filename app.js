@@ -38,4 +38,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.use(function(req, res, next) {
+  console.log('Time:', Date.now());
+  next();
+
+  res.send('Hello World');
+});
+
 module.exports = app;
