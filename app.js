@@ -3,6 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const sql = require('mssql');
+
+/* connection string: 
+AccountEndpoint=https://sqluser.documents.azure.com:443/;
+AccountKey=em5IxWlmVPMHbIWDCjXWITDmzTJSUoQCIY3LZJZSBv0G0PYxuqGqpU13Tthyuiw9Qlj7Yj8HsSM4ACDbuSkmaA==
+*/
+const config = {
+  
+}
+
+
+const pool = new sql.ConnectionPool(config)
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
