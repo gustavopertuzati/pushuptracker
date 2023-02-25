@@ -7,7 +7,9 @@ const endpoint = process.env.COSMOS_ENDPOINT;
 
 const client = new CosmosClient({ endpoint, key });
 
-const database = client.database('db1');
+const databaseName = 'db1';
+const { database } = await client.databases.createIfNotExists({ id: databaseName });
+console.log(`${database.id} database ready`);
 
 const userContainer = database.container('users');
 const pushupContainer = database.container('pushup_records');
