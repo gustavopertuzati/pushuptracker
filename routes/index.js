@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-import { CosmosClient } from '@azure/cosmos';
+const { CosmosClient } = require('@azure/cosmos');
 
 const key = process.env.COSMOS_KEY;
 const endpoint = process.env.COSMOS_ENDPOINT;
@@ -8,8 +8,11 @@ const endpoint = process.env.COSMOS_ENDPOINT;
 const client = new CosmosClient({ endpoint, key });
 
 const databaseName = 'db1';
-const { database } = await client.databases.createIfNotExists({ id: databaseName });
-console.log(`${database.id} database ready`);
+async function createDB(id){
+  const { database } = await client.databases.createIfNotExists({ id });
+  console.log(`${database.id} database ready`);
+}
+createDB(databaseName);
 
 const userContainer = database.container('users');
 const pushupContainer = database.container('pushup_records');
